@@ -18,20 +18,8 @@ public class Calculator {
     }
 
     public void calculaTroco(double valorProduto, double valorPago) {
-        notas.put(200, 0);
-        notas.put(100, 0);
-        notas.put(50, 0);
-        notas.put(20, 0);
-        notas.put(10, 0);
-        notas.put(5, 0);
-        notas.put(2,0);
 
-        moedas.put(1.0,0);
-        moedas.put(0.50,0);
-        moedas.put(0.25,0);
-        moedas.put(0.10,0);
-        moedas.put(0.05,0);
-
+            mapInput();
 
         BigDecimal valorTotal = new BigDecimal(valorPago - valorProduto).setScale(2, RoundingMode.HALF_UP);
 
@@ -51,5 +39,22 @@ public class Calculator {
 
             }
         }
+    }
+
+    private void mapInput(){
+        notas.put(200, 0);
+        notas.put(100, 0);
+        notas.put(50, 0);
+        notas.put(20, 0);
+        notas.put(10, 0);
+        notas.put(5, 0);
+        notas.put(2,0);
+
+        moedas.put(1.0,0);
+        moedas.put(0.50,0);
+        moedas.put(0.25,0);
+        moedas.put(0.10,0);
+        moedas.put(0.05,0);
+
     }
 }

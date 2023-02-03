@@ -15,6 +15,7 @@ public class App {
         int value;
 
         try {
+
             double valorPago;
             double valorProduto;
             BigDecimal valorTroco;
@@ -22,23 +23,27 @@ public class App {
             do {
                 System.out.println("Digite o valor do produto: ");
                 valorProduto = sc.nextDouble();
-
             } while (valorProduto < 0);
 
             do {
                 System.out.println("Digite o valor que voce ira pagar: ");
                 valorPago = sc.nextDouble();
                 valorTroco = BigDecimal.valueOf(valorPago - valorProduto).setScale(2, RoundingMode.HALF_UP);
-
             } while (valorPago < 0);
+
 
             if (valorProduto > valorPago) {
                 throw new ValorInvalidoException();
             }
 
             calculator.calculaTroco(valorProduto, valorPago);
-
             System.out.println("Valor do Troco: R$ " + valorTroco);
+
+            /**
+             * Caso o valor do troco for menor que 5 centavos então não tem como dar troco
+             * Caso contrario faz um forEach para printar todos os elementos do map que tiverem o valor maior que zero
+             */
+
             if (valorTroco.doubleValue() < 0.05 && valorTroco.doubleValue()!= 0) {
                 System.out.println("Troco menor que 5 centavos");
             } else {

@@ -2,6 +2,8 @@ import java.math.BigDecimal;
 import java.math.RoundingMode;
 import java.util.LinkedHashMap;
 
+
+
 public class Calculator {
 
 
@@ -17,30 +19,41 @@ public class Calculator {
         return moedas;
     }
 
+    /**
+     *
+     * @param valorProduto
+     * @param valorPago
+     * Utiliza os dois parametros para calcular o valor do troco
+     * O forEach entra elemento por elemento do map, caso a nota - troco for maior que zero, então ele subtrai o valor
+     * da nota do troco e adiciona um ao value de elemento.
+     */
     public void calculaTroco(double valorProduto, double valorPago) {
 
             mapInput();
 
-        BigDecimal valorTotal = new BigDecimal(valorPago - valorProduto).setScale(2, RoundingMode.HALF_UP);
+        BigDecimal valorTroco = new BigDecimal(valorPago - valorProduto).setScale(2, RoundingMode.HALF_UP);
 
         for (Integer k : notas.keySet()) {
             value = notas.get(k);
-            while (valorTotal.doubleValue() - k >= 0) {
+            while (valorTroco.doubleValue() - k >= 0) {
                 notas.put(k, value += 1);
-                valorTotal = valorTotal.subtract(BigDecimal.valueOf(k));
+                valorTroco = valorTroco.subtract(BigDecimal.valueOf(k));
             }
         }
 
         for (Double k : moedas.keySet()) {
             value = moedas.get(k);
-            while (valorTotal.doubleValue() - k >= 0) {
+            while (valorTroco.doubleValue() - k >= 0) {
                 moedas.put(k, value += 1);
-                valorTotal = valorTotal.subtract(BigDecimal.valueOf(k));
+                valorTroco = valorTroco.subtract(BigDecimal.valueOf(k));
 
             }
         }
     }
 
+    /**
+     * Método utilizado para inicializar todos os elementos do map
+     */
     private void mapInput(){
         notas.put(200, 0);
         notas.put(100, 0);
